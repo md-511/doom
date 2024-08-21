@@ -1,0 +1,3 @@
+/home/md/Desktop/doom/build/CMakeFiles/raycaster.dir
+/home/md/Desktop/doom/build/CMakeFiles/edit_cache.dir
+/home/md/Desktop/doom/build/CMakeFiles/rebuild_cache.dir
