@@ -34,6 +34,7 @@ Raycaster::Raycaster() : running(true), window(nullptr), renderer(nullptr) {
     keystate[SDLK_d] = 0;
     keystate[SDLK_LEFT] = 0;
     keystate[SDLK_RIGHT] = 0;
+    // keystate[SDLK_ESCAPE] = 0;
 
     // SETTING PLAYER INITIAL VALUES
 
@@ -104,16 +105,184 @@ Raycaster::Raycaster() : running(true), window(nullptr), renderer(nullptr) {
     //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     // };
 
+    // map.width = 50;
+    // map.height = 50;
+    // map.data = {
+    //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    //     {1,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,3,3,0,3,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,3,3,0,3,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,3,3,0,3,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,3,3,0,3,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    // };
+
+    // map.width = 50;
+    // map.height = 50;
+    // map.data = {
+    //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    //     {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
+    //     {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+    //     {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,1,0,0,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    //     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    // };
+
     tileSize = std::min(screenWidth / map.width, screenHeight / map.height);
 
     player.x = map.width * tileSize / 2, player.y = map.height * tileSize / 2;
     player.a = 0;
-    player.speed = 2;
+    player.speed = 1;
     player.rotationSpeed = 0.05;
-    player.dx = cos(player.a) * player.speed;
-    player.dy = sin(player.a) * player.speed;
+    player.dx = cos(player.a);
+    player.dy = sin(player.a);
     player.fov = 60;
     player.distFromPlane = screenWidth / 2 / tan(PI * player.fov / 2 / 180);
+    player.pitch = 0;
+    player.offsetX = 0;
+    player.offsetY = pow(sin(tan(player.offsetX)), 2);
+
+
+    // tmp
+    menu = false;
+    inc = true;
+    recoilAngle = 0;
+
+    crosshairTexture = loadTexture("../assets/crosshair.png", renderer);
+    gunTexture = loadTexture("../assets/handMain.png", renderer);
+}
+
+SDL_Texture* Raycaster::loadTexture(const std::string &path, SDL_Renderer *renderer) {
+    SDL_Texture *newTexture = nullptr;
+    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+    if (loadedSurface == nullptr) {
+        std::cout << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
+    } else {
+        newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+        if (newTexture == nullptr) {
+            std::cout << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << std::endl;
+        }
+        SDL_FreeSurface(loadedSurface);
+    }
+    return newTexture;
+}
+
+void Raycaster::renderCrosshair() {
+    float scale = 0.07f;
+    // Calculate center position
+    int crosshairWidth, crosshairHeight;
+    SDL_QueryTexture(crosshairTexture, NULL, NULL, &crosshairWidth, &crosshairHeight);
+    crosshairHeight *= scale;
+    crosshairWidth *= scale;
+    int crosshairX = (screenWidth - crosshairWidth) / 2;
+    int crosshairY = (screenHeight - crosshairHeight) / 2;
+
+    // Render crosshair
+    SDL_Rect dstRect = {crosshairX, crosshairY, crosshairWidth, crosshairHeight};
+    SDL_RenderCopy(renderer, crosshairTexture, NULL, &dstRect);
+}
+
+void Raycaster::renderGun() {
+    float scale = 1.0f;
+    int gunWidth, gunHeight;
+    SDL_QueryTexture(gunTexture, NULL, NULL, &gunWidth, &gunHeight);
+    gunWidth *= scale;
+    gunHeight *= scale;
+    int gunX = screenWidth - 0.85 * gunWidth + player.offsetX * 50;
+    int gunY = screenHeight - gunHeight + 50 - player.offsetY * 50;
+
+    SDL_Rect gunRect = {gunX, gunY, gunWidth, gunHeight};
+    SDL_Point center = {gunWidth / 2, gunHeight};
+    // SDL_RenderCopy(renderer, gunTexture, NULL, &gunRect);
+    SDL_RenderCopyEx(renderer, gunTexture, NULL, &gunRect, recoilAngle, &center, SDL_FLIP_NONE);
+    // recoilAngle = 0;
 }
 
 void Raycaster::run() {
@@ -137,8 +306,11 @@ void Raycaster::run() {
         }
 
         raycast(false);
+        renderCrosshair();
+        renderGun();
         drawMiniMap();
         SDL_RenderPresent(renderer);
+        // recoilAngle = 0;
     }
 
     SDL_DestroyRenderer(renderer);
@@ -147,6 +319,14 @@ void Raycaster::run() {
 }
 
 void Raycaster::handleEvents() {
+    if (!menu) {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    } else {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+
+    // std::cout << menu << std::endl;
+
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -177,6 +357,9 @@ void Raycaster::handleEvents() {
                         break;
                     case SDLK_RIGHT:
                         keystate[SDLK_RIGHT] = 1;
+                        break;
+                    case SDLK_ESCAPE:
+                        menu = !menu;
                         break;
                     default:
                         // std::cout << "Other key pressed: " << event.key.keysym.sym << std::endl;
@@ -215,6 +398,17 @@ void Raycaster::handleEvents() {
                 }
                 break;
 
+            case SDL_MOUSEMOTION:
+                if (!menu) handleMouseMotion();
+                break;
+
+            case SDL_MOUSEBUTTONDOWN:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    std::cout << "Bang!" << std::endl;
+                    if (recoilAngle <= 2) recoilAngle = 10;
+                }
+                break;
+
             default:
                 break;
         }
@@ -234,6 +428,31 @@ void Raycaster::handleEvents() {
     // if (keystate[SDL_SCANCODE_RIGHT]) {
     //     std::cout << "Right arrow key is pressed!" << std::endl;
     // }
+    if (recoilAngle > 0) recoilAngle -= 1;
+}
+
+void Raycaster::handleMouseMotion() {
+    int mouseX, mouseY;
+    SDL_GetRelativeMouseState(&mouseX, &mouseY);
+
+    // Sensitivity multiplier
+    double sensitivity = 0.0005;
+
+    // Adjust player direction based on mouse movement
+    player.a += mouseX * sensitivity;
+    player.pitch -= mouseY * sensitivity;
+
+    double maxPitch = PI / 2;
+    if (player.pitch > maxPitch) player.pitch = maxPitch;
+    if (player.pitch < -maxPitch) player.pitch = -maxPitch;
+
+    // Keep angle within 0 to 2*PI
+    if (player.a < 0) player.a += 2 * M_PI;
+    if (player.a >= 2 * M_PI) player.a -= 2 * M_PI;
+
+    // Update direction vector
+    player.dx = cos(player.a);
+    player.dy = sin(player.a);
 }
 
 // void Raycaster::drawMiniMap() {
@@ -289,8 +508,8 @@ void Raycaster::drawMiniMap() {
             SDL_Rect tile;
             tile.x = x * tileSize * scaleFactor;  // Scale down the x position
             tile.y = y * tileSize * scaleFactor;  // Scale down the y position
-            tile.w = tileSize * scaleFactor;  // Scale down the width
-            tile.h = tileSize * scaleFactor;  // Scale down the height
+            tile.w = tileSize * scaleFactor + 5;  // Scale down the width
+            tile.h = tileSize * scaleFactor + 5;  // Scale down the height
 
             SDL_RenderFillRect(renderer, &tile);
         }
@@ -360,122 +579,241 @@ void Raycaster::drawMiniMap() {
 //     }
 // }
 
+PlayerState Raycaster::getPlayerState() {
+    int w = keystate[SDLK_w];
+    int a = keystate[SDLK_a];
+    int s = keystate[SDLK_s];
+    int d = keystate[SDLK_d];
+
+    // 4 keys
+    if (w && a && s && d) return STATIONARY;
+
+    // 3 keys
+    if (w && a && s) return LEFT;
+    if (w && a && d) return FORWARD;
+    if (w && s && d) return RIGHT;
+    if (d && a && s) return BACKWARDS;
+
+    // 2 keys
+    if (w && a) return LEFT_FRONT;
+    if (w && s) return STATIONARY;
+    if (w && d) return RIGHT_FRONT;
+    if (a && s) return LEFT_BACK;
+    if (d && s) return RIGHT_BACK;
+    if (a && d) return STATIONARY;
+
+    // 1 key
+    if (w) return FORWARD;
+    if (s) return BACKWARDS;
+    if (a) return LEFT;
+    if (d) return RIGHT;
+
+    return STATIONARY;
+
+}
+
 void Raycaster::move() {
-    // Define the rotation speed
+    PlayerState state = getPlayerState();
 
-    if (keystate[SDLK_w]) {
-        // player.x += player.dirX * player.speed;
-        // player.y += player.dirY * player.speed;
-        std::pair<bool, bool> collisionStatus = checkCollision(0, player.x, player.y, player.dx, player.dy);
+    if (state != STATIONARY) {
+        double newX = player.x, newY = player.y;
+        switch (state)
+        {
+            case FORWARD:
+                newX += player.dx * player.speed;
+                newY += player.dy * player.speed;
+                break;
+            
+            case BACKWARDS:
+                newX += -player.dx * player.speed;
+                newY += -player.dy * player.speed;
+                break;
+            
+            case LEFT:
+                newX += player.dy * player.speed;
+                newY += -player.dx * player.speed;
+                break;
 
-        if (!collisionStatus.first) {
-            player.x += player.dx;
+            case RIGHT:
+                newX += -player.dy * player.speed;
+                newY += player.dx * player.speed;
+                break;
+
+            case LEFT_FRONT:
+                newX += (player.dx + player.dy) / sqrt(2) * player.speed;
+                newY += (player.dy - player.dx) / sqrt(2) * player.speed;
+                break;
+            
+            case RIGHT_FRONT:
+                newX += (player.dx - player.dy) / sqrt(2) * player.speed;
+                newY += (player.dy + player.dx) / sqrt(2) * player.speed;
+                break;
+
+            case LEFT_BACK:
+                newX += (player.dy - player.dx) / sqrt(2) * player.speed;
+                newY += (-player.dx - player.dy) / sqrt(2) * player.speed;
+                break;
+
+            case RIGHT_BACK:
+                newX += (-player.dy - player.dx) / sqrt(2) * player.speed;
+                newY += (player.dx - player.dy) / sqrt(2) * player.speed;
+                break;
+
+            default:
+                std::cout << "Invalid State!" << std::endl;
+                exit(1);
+                break;
         }
 
-        if (!collisionStatus.second) {
-            player.y += player.dy;
+        if (!checkCollision(newX, player.y)) {
+            player.x = newX;
         }
+
+        if (!checkCollision(player.x, newY)) {
+            player.y = newY;
+        }
+
+        if (inc) {
+            player.offsetX += 0.1;
+        } else {
+            player.offsetX -= 0.1;
+        }
+
+        if (player.offsetX >= 1) inc = 0;
+        if (player.offsetX <= -1) inc = 1;
+
+        player.offsetY = pow(sin(tan(player.offsetX)), 2);
+
+    } else {
+        // std::cout << player.offsetX << std::endl;
+
+        if (abs(player.offsetX) < 0.01) {
+            player.offsetX = 0;
+        } else if (player.offsetX < 0) {
+            player.offsetX += 0.1;
+        } else if (player.offsetX > 0) {
+            player.offsetX -= 0.1;
+        }
+
+        player.offsetY = pow(sin(tan(player.offsetX)), 2);
     }
-    if (keystate[SDLK_s]) {
-        // player.x -= player.dirX * player.speed;
-        // player.y -= player.dirY * player.speed;
-        std::pair<bool, bool> collisionStatus = checkCollision(1, player.x, player.y, player.dx, player.dy);
 
-        if (!collisionStatus.first) {
-            player.x -= player.dx;
-        }
+    // if (keystate[SDLK_w]) {
+    //     // player.x += player.dirX * player.speed;
+    //     // player.y += player.dirY * player.speed;
+    //     std::pair<bool, bool> collisionStatus = checkCollision(0, player.x, player.y, player.dx, player.dy);
 
-        if (!collisionStatus.second) {
-            player.y -= player.dy;
-        }
-    }
-    if (keystate[SDLK_a]) {
-        // player.x += player.dirY * player.speed;
-        // player.y -= player.dirX * player.speed;
-        std::pair<bool, bool> collisionStatus = checkCollision(2, player.x, player.y, player.dx, player.dy);
+    //     if (!collisionStatus.first) {
+    //         player.x += player.dx;
+    //     }
 
-        if (!collisionStatus.first) {
-            player.x += player.dy;
-        }
+    //     if (!collisionStatus.second) {
+    //         player.y += player.dy;
+    //     }
 
-        if (!collisionStatus.second) {
-            player.y -= player.dx;
-        }
-    }
-    if (keystate[SDLK_d]) {
-        // player.x -= player.dirY * player.speed;
-        // player.y += player.dirX * player.speed;
-        std::pair<bool, bool> collisionStatus = checkCollision(3, player.x, player.y, player.dx, player.dy);
+    //     if (inc) {
+    //         player.offsetX += 0.1;
+    //     } else {
+    //         player.offsetX -= 0.1;
+    //     }
 
-        if (!collisionStatus.first) {
-            player.x -= player.dy;
-        }
+    //     if (player.offsetX >= 1) inc = 0;
+    //     if (player.offsetX <= -1) inc = 1;
 
-        if (!collisionStatus.second) {
-            player.y += player.dx;
-        }
-    }
+    //     player.offsetY = pow(sin(tan(player.offsetX)), 2);
+    // }
+    // if (keystate[SDLK_s]) {
+    //     // player.x -= player.dirX * player.speed;
+    //     // player.y -= player.dirY * player.speed;
+    //     std::pair<bool, bool> collisionStatus = checkCollision(1, player.x, player.y, player.dx, player.dy);
+
+    //     if (!collisionStatus.first) {
+    //         player.x -= player.dx;
+    //     }
+
+    //     if (!collisionStatus.second) {
+    //         player.y -= player.dy;
+    //     }
+
+    //     if (inc) {
+    //         player.offsetX += 0.1;
+    //     } else {
+    //         player.offsetX -= 0.1;
+    //     }
+
+    //     if (player.offsetX >= 1) inc = 0;
+    //     if (player.offsetX <= -1) inc = 1;
+
+    //     player.offsetY = pow(sin(tan(player.offsetX)), 2);
+    // }
+    // if (keystate[SDLK_a]) {
+    //     // player.x += player.dirY * player.speed;
+    //     // player.y -= player.dirX * player.speed;
+    //     std::pair<bool, bool> collisionStatus = checkCollision(2, player.x, player.y, player.dx, player.dy);
+
+    //     if (!collisionStatus.first) {
+    //         player.x += player.dy;
+    //     }
+
+    //     if (!collisionStatus.second) {
+    //         player.y -= player.dx;
+    //     }
+
+    //     if (inc) {
+    //         player.offsetX += 0.1;
+    //     } else {
+    //         player.offsetX -= 0.1;
+    //     }
+
+    //     if (player.offsetX >= 1) inc = 0;
+    //     if (player.offsetX <= -1) inc = 1;
+
+    //     player.offsetY = pow(sin(tan(player.offsetX)), 2);
+    // }
+    // if (keystate[SDLK_d]) {
+    //     // player.x -= player.dirY * player.speed;
+    //     // player.y += player.dirX * player.speed;
+    //     std::pair<bool, bool> collisionStatus = checkCollision(3, player.x, player.y, player.dx, player.dy);
+
+    //     if (!collisionStatus.first) {
+    //         player.x -= player.dy;
+    //     }
+
+    //     if (!collisionStatus.second) {
+    //         player.y += player.dx;
+    //     }
+
+    //     if (inc) {
+    //         player.offsetX += 0.1;
+    //     } else {
+    //         player.offsetX -= 0.1;
+    //     }
+
+    //     if (player.offsetX >= 1) inc = 0;
+    //     if (player.offsetX <= -1) inc = 1;
+
+    //     player.offsetY = pow(sin(tan(player.offsetX)), 2);
+    // }
     if (keystate[SDLK_LEFT]) {
         player.a -= player.rotationSpeed;
         if (player.a < 0) { player.a += 2*PI; }
-        player.dx = cos(player.a) * player.speed;
-        player.dy = sin(player.a) * player.speed;
+        player.dx = cos(player.a);
+        player.dy = sin(player.a);
     }
     if (keystate[SDLK_RIGHT]) {
         player.a += player.rotationSpeed;
         if (player.a > 2*PI) { player.a -= 2*PI; }
-        player.dx = cos(player.a) * player.speed;
-        player.dy = sin(player.a) * player.speed;
+        player.dx = cos(player.a);
+        player.dy = sin(player.a);
     }
+
+    // std::cout << "Speed: " << sqrt(pow(player.dx, 2) + pow(player.dy, 2));
 }
 
-std::pair<bool, bool> Raycaster::checkCollision(int key, double x, double y, double dx, double dy) {
-    std::pair<bool, bool> ret = {0, 0};
-    int newX, newY;
-    switch (key)
-    {
-    case 0:
-        // if (map.data[(x + dx) / tileSize][y / tileSize]) ret.first = 1;
-        // if (map.data[x / tileSize][(y + dy) / tileSize]) ret.second = 1;
-        newX = static_cast<int>((x + dx) / tileSize);
-        newY = static_cast<int>((y + dy) / tileSize);
-        // if (map.data[newX][newY]) return {1, 1};
-        break;
-
-    case 1:
-        // if (map.data[(x - dx) / tileSize][y / tileSize]) ret.first = 1;
-        // if (map.data[x / tileSize][(y - dy) / tileSize]) ret.second = 1;
-        newX = static_cast<int>((x - dx) / tileSize);
-        newY = static_cast<int>((y - dy) / tileSize);
-        // if (map.data[newX][newY]) return {1, 1};
-        // if (map.data[(x - dx) / tileSize][(y - dy) / tileSize]) return {1, 1};
-        break;
-
-    case 2:
-        // if (map.data[(x + dy) / tileSize][y / tileSize]) ret.first = 1;
-        // if (map.data[x / tileSize][(y - dx) / tileSize]) ret.second = 1;
-        newX = static_cast<int>((x + dy) / tileSize);
-        newY = static_cast<int>((y - dx) / tileSize);
-        // if (map.data[newX][newY]) return {1, 1};
-        // if (map.data[(x + dy) / tileSize][(y - dx) / tileSize]) return {1, 1};
-        break;
-
-    case 3:
-        // if (map.data[(x - dy) / tileSize][y / tileSize]) ret.first = 1;
-        // if (map.data[x / tileSize][(y + dx) / tileSize]) ret.second = 1;
-        newX = static_cast<int>((x - dy) / tileSize);
-        newY = static_cast<int>((y + dx) / tileSize);
-        // if (map.data[newX][newY]) return {1, 1};
-        // if (map.data[(x - dy) / tileSize][(y + dx) / tileSize]) return {1, 1};
-        break;
-    
-    default:
-        break;
-    }
-
-    if (map.data[newX][newY]) return {1, 1};
-
-    return ret;
+bool Raycaster::checkCollision(double x, double y) {
+    int mapX = static_cast<int>(x / tileSize), mapY = static_cast<int>(y / tileSize);
+    // std::cout << "MapX: " << mapX << " MapY: " << mapY << " Wall: " << (map.data[mapX][mapY] > 0) << std::endl;
+    return map.data[mapY][mapX] > 0;
 }
 
 //     float oldDirX = player.dirX;
@@ -789,32 +1127,36 @@ void Raycaster::raycast(bool debug=false) {
         // double vDist = getDist(player.x, player.y, vx, vy);
 
         double hitX, hitY;
+        double fadeFactor;
+        double maxDistance = 800.0;
+        dist = std::min(hDist, vDist);
+        fadeFactor = 1.0 - std::min(dist / maxDistance, 1.0);
 
         if (hDist < vDist) {
             hitX = hx;
             hitY = hy;
-            dist = hDist;
+            // dist = hDist;
             // SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
             int mapX = hx / tileSize, mapY = hy / tileSize;
 
-            if (map.data[mapY][mapX] == 1) SDL_SetRenderDrawColor(renderer, 217, 105, 98, 255);
-            if (map.data[mapY][mapX] == 2) SDL_SetRenderDrawColor(renderer, 39, 219, 92, 255);
-            if (map.data[mapY][mapX] == 3) SDL_SetRenderDrawColor(renderer, 190, 230, 80, 255);
-            if (map.data[mapY][mapX] == 4) SDL_SetRenderDrawColor(renderer, 140, 59, 184, 255);
-            if (map.data[mapY][mapX] == 5) SDL_SetRenderDrawColor(renderer, 50, 101, 209, 255);
+            if (map.data[mapY][mapX] == 1) SDL_SetRenderDrawColor(renderer, 217 * fadeFactor, 105 * fadeFactor, 98 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 2) SDL_SetRenderDrawColor(renderer, 39 * fadeFactor, 219 * fadeFactor, 92 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 3) SDL_SetRenderDrawColor(renderer, 190 * fadeFactor, 230 * fadeFactor, 80 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 4) SDL_SetRenderDrawColor(renderer, 140 * fadeFactor, 59 * fadeFactor, 184 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 5) SDL_SetRenderDrawColor(renderer, 50 * fadeFactor, 101 * fadeFactor, 209 * fadeFactor, 255);
 
         } else {
             hitX = vx;
             hitY = vy;
-            dist = vDist;
+            // dist = vDist;
 
             int mapX = vx / tileSize, mapY = vy / tileSize;
  
-            if (map.data[mapY][mapX] == 1) SDL_SetRenderDrawColor(renderer, 110, 51, 47, 255);
-            if (map.data[mapY][mapX] == 2) SDL_SetRenderDrawColor(renderer, 20, 122, 107, 255);
-            if (map.data[mapY][mapX] == 3) SDL_SetRenderDrawColor(renderer, 112, 135, 47, 255);
-            if (map.data[mapY][mapX] == 4) SDL_SetRenderDrawColor(renderer, 76, 32, 99, 255);
-            if (map.data[mapY][mapX] == 5) SDL_SetRenderDrawColor(renderer, 26, 50, 102, 255);
+            if (map.data[mapY][mapX] == 1) SDL_SetRenderDrawColor(renderer, 110 * fadeFactor, 51 * fadeFactor, 47 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 2) SDL_SetRenderDrawColor(renderer, 20 * fadeFactor, 122 * fadeFactor, 107 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 3) SDL_SetRenderDrawColor(renderer, 112 * fadeFactor, 135 * fadeFactor, 47 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 4) SDL_SetRenderDrawColor(renderer, 76 * fadeFactor, 32 * fadeFactor, 99 * fadeFactor, 255);
+            if (map.data[mapY][mapX] == 5) SDL_SetRenderDrawColor(renderer, 26 * fadeFactor, 50 * fadeFactor, 102 * fadeFactor, 255);
         }
 
         if (debug) {
@@ -825,9 +1167,10 @@ void Raycaster::raycast(bool debug=false) {
         // fixing fisheye
         dist *= cos(ra - player.a);
 
-        double projectedHeight = tileSize / dist * player.distFromPlane;
-        double drawStart = screenHeight / 2 - projectedHeight / 2;
-        double drawEnd = projectedHeight;
+        double projectedHeight = 1 * tileSize / dist * player.distFromPlane;
+        double drawStart = screenHeight / 2 - projectedHeight / 2 + (player.pitch * screenHeight);
+        // double drawEnd = projectedHeight;
+        double drawEnd = screenHeight / 2 + projectedHeight / 2 + (player.pitch * screenHeight);
 
         double rectWidth = screenWidth / numRays;
         // double rectHeight = drawEnd - drawStart;
@@ -836,9 +1179,28 @@ void Raycaster::raycast(bool debug=false) {
         column.x = i * rectWidth;
         column.y = drawStart;
         column.w = rectWidth;
-        column.h = drawEnd;
+        column.h = drawEnd - drawStart;
 
-        if (!debug) SDL_RenderFillRect(renderer, &column);
+        SDL_Rect gameFloor;
+        gameFloor.x = i * rectWidth;
+        gameFloor.y = drawEnd;
+        gameFloor.w = rectWidth;
+        gameFloor.h = screenHeight - drawEnd;
+
+        SDL_Rect gameCeil;
+        gameCeil.x = i * rectWidth;
+        gameCeil.y = 0;
+        gameCeil.w = rectWidth;
+        gameCeil.h = drawStart;
+
+        if (!debug) {
+            SDL_RenderFillRect(renderer, &column);
+            SDL_SetRenderDrawColor(renderer, 24, 24, 24, 255 * fadeFactor);
+            SDL_RenderFillRect(renderer, &gameFloor);
+            SDL_SetRenderDrawColor(renderer, 0, 50, 170, 255 * fadeFactor);
+            SDL_RenderFillRect(renderer, &gameCeil);
+        }
+            
 
 
 

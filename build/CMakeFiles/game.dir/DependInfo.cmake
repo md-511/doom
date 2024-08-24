@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/md/Desktop/doom/src/main.cpp" "CMakeFiles/sdl2_example.dir/src/main.cpp.o" "gcc" "CMakeFiles/sdl2_example.dir/src/main.cpp.o.d"
+  "/home/md/Desktop/doom/src/main.cpp" "CMakeFiles/game.dir/src/main.cpp.o" "gcc" "CMakeFiles/game.dir/src/main.cpp.o.d"
+  "/home/md/Desktop/doom/src/raycaster.cpp" "CMakeFiles/game.dir/src/raycaster.cpp.o" "gcc" "CMakeFiles/game.dir/src/raycaster.cpp.o.d"
   )
 
 # Targets to which this target links.

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/SDL2 -I/home/md/Desktop/doom/include
+CXX_INCLUDES = -I/home/md/Desktop/doom/include -I/usr/include/SDL2
 
 CXX_FLAGS = -std=gnu++11
 

@@ -6,11 +6,13 @@ struct Player {
     double dx, dy;
     double a;
     double rotationSpeed;
+    double pitch;
     // double dirX, dirY; // Direction vector
     // double planeX, planeY; // Camera plane
     double speed;
     int fov;
     double distFromPlane;
+    double offsetX, offsetY;
 };
 
 #endif
